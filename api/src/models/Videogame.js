@@ -28,6 +28,9 @@ module.exports = (sequelize) => {
       type: DataTypes.ARRAY(DataTypes.JSON),
       allowNull: false,
     },
+    background_image:{
+      type: DataTypes.STRING,
+    },
     createdInDb:{
       type: DataTypes.BOOLEAN,
       defaultValue: false

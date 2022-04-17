@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { Op } = require("sequelize");
 const axios = require('axios');
-const { api, Videogame, Gender } = require('../db.js');
+const { api, Videogame } = require('../db.js');
 
 const router = Router();
 
@@ -10,11 +10,31 @@ const apiGetData = async () => {
     const apiPage2 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=2&page_size=1`);
     const apiPage3 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=3&page_size=1`);
     const apiPage4 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=4&page_size=1`);
-    const apiData = apiPage1.data.results.concat(apiPage2.data.results.concat(apiPage3.data.results.concat(apiPage4.data.results)));
+    let apiData = apiPage1.data.results.concat(apiPage2.data.results.concat(apiPage3.data.results.concat(apiPage4.data.results)));
+
+    apiData = apiData.map((el) => {
+        return {
+            background_image: el.background_image,
+            name: el.name,
+            genres: el.genres.map(el => {return {name: el.name}})
+        }
+    });
     return apiData;
 }
 
-const allDataApi = async ()=> {
+const apiNameGetData = async (name) => {
+    const dataApi = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${api}&page_size=15`);
+    const dataInfo = dataApi.data.results.map((el) => {
+        return {
+            background_image: el.background_image,
+            name: el.name,
+            genres: el.genres.map(el => {return {name: el.name}})
+        }
+    });
+    return dataInfo;
+}
+
+/*const allDataApi = async ()=> {
     const apiData = await apiGetData();
     for (let i = 0; i < apiData.length; i++) {
         const data = await axios.get(`https://api.rawg.io/api/games/${apiData[i].id}?key=${api}`);
@@ -26,7 +46,8 @@ const allDataApi = async ()=> {
             rating: data.data.rating,
             platforms: data.data.platforms.map((el)=>{
                 return {name: el.platform.name}
-            })
+            }),
+            background_image: data.data.background_image
         }
     }
     return apiData;
@@ -41,20 +62,19 @@ const apiToDb = async () => {
             description: dataToDb[i].description,
             released: dataToDb[i].released,
             rating: dataToDb[i].rating,
-            platforms: dataToDb[i].platforms
+            platforms: dataToDb[i].platforms,
+            background_image: dataToDb[i].background_image
         });
     }
 }
 
 const allData = async () => {
     let dbData = await Videogame.findAll();
-    if (dbData) {
-        return dbData;
-    }else{
+    if (dbData.length === 0) {
         await apiToDb();
         dbData = await Videogame.findAll();
     }
-    return dbData;
+    return dbData;//devolver solo los datos necesarios
 }
 
 const getByName = async (name)=> {
@@ -71,36 +91,15 @@ const getByName = async (name)=> {
         data = await getByName(name);
     }
     return data;
-}
-
-const getById = async (id)=> {
-    let data = await Videogame.findAll();
-    if(data.length > 0){
-        data = await Videogame.findByPk(id);
-    }else{
-        await apiToDb();
-        data = await getById(id);
-    }
-    return data;
-}
+}*/
 
 //GET
 router.get('/', async (req, res) => {
     const {name} = req.query;
     if(name){
-        res.send(await getByName(name));
+        res.send(await apiNameGetData(name));
     }else{
-        res.send(await allData());
-    }
-});
-
-//GET:ID
-router.get('/:id', async (req, res) => {
-    const {id} = req.params;
-    if(id){
-        res.send(await getById(id));
-    }else{
-        res.send(await allData());
+        res.send((await apiGetData()));
     }
 });
 
