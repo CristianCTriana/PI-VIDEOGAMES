@@ -6,6 +6,7 @@ const { api, Videogame, Genre} = require('../db.js');
 const router = Router();
 
 //TODOS LOS VIDEOGAMES
+//API
 const apiGetData = async () => {
     const apiPage1 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=1&page_size=25`);
     const apiPage2 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=2&page_size=25`);
@@ -23,6 +24,7 @@ const apiGetData = async () => {
     return apiData;
 }
 
+//DB
 const dbGetData = async () => {
     return await Videogame.findAll({
         attributes: ["background_image", "name"],
@@ -37,6 +39,7 @@ const dbGetData = async () => {
 }
 
 //VIDEOGAMES POR NOMBRE
+//API
 const apiNameGetData = async (name) => {
     const dataApi = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${api}&page_size=15`);
     const dataInfo = dataApi.data.results.map((el) => {
@@ -49,6 +52,7 @@ const apiNameGetData = async (name) => {
     return dataInfo;
 }
 
+//DB
 const dbNameGetData = async (name) => {
     return await Videogame.findAll({
         where: {
