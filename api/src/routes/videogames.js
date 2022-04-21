@@ -8,14 +8,14 @@ const router = Router();
 //TODOS LOS VIDEOGAMES
 //API
 const apiGetData = async () => {
-    const apiPage1 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=1&page_size=25`);
-    const apiPage2 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=2&page_size=25`);
-    const apiPage3 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=3&page_size=25`);
-    const apiPage4 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=4&page_size=25`);
-    let apiData = apiPage1.data.results.concat(apiPage2.data.results.concat(apiPage3.data.results.concat(apiPage4.data.results)));
+    const apiPage1 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=1&page_size=40`);
+    const apiPage2 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=2&page_size=40`);
+    const apiPage3 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=3&page_size=20`);
+    let apiData = apiPage1.data.results.concat(apiPage2.data.results.concat(apiPage3.data.results));
 
     apiData = apiData.map((el) => {
         return {
+            id: el.id,
             background_image: el.background_image,
             name: el.name,
             genres: el.genres.map(el => {return {name: el.name}})

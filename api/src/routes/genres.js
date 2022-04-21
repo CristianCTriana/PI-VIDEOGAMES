@@ -6,11 +6,10 @@ const { api, Genre } = require('../db.js');
 const router = Router();
 
 const apiGenres = async () => {
-    const apiPage1 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=1&page_size=25`);
-    const apiPage2 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=2&page_size=25`);
-    const apiPage3 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=3&page_size=25`);
-    const apiPage4 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=4&page_size=25`);
-    const apiData = apiPage1.data.results.concat(apiPage2.data.results.concat(apiPage3.data.results.concat(apiPage4.data.results)));
+    const apiPage1 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=1&page_size=40`);
+    const apiPage2 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=2&page_size=40`);
+    const apiPage3 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=3&page_size=20`);
+    const apiData = apiPage1.data.results.concat(apiPage2.data.results.concat(apiPage3.data.results));
     return apiData;
 }
 
