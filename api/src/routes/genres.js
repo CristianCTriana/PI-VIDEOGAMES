@@ -8,7 +8,7 @@ const router = Router();
 const apiGenres = async () => {
     const apiPage1 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=1&page_size=40`);
     const apiPage2 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=2&page_size=40`);
-    const apiPage3 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=3&page_size=20`);
+    const apiPage3 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=5&page_size=20`);
     const apiData = apiPage1.data.results.concat(apiPage2.data.results.concat(apiPage3.data.results));
     return apiData;
 }

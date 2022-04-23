@@ -1,17 +1,20 @@
 import React, { useEffect, useState} from "react";
 import Select from 'react-select';
 import {useDispatch, useSelector} from "react-redux";
-import { getVideogames } from "../Actions";
+import { getVideogames, filterVideogameByGenre, getGenres, filterByOrigin, sortByName, sortByRating } from "../Actions";
 import {Link} from 'react-router-dom';
 import Card from "./Card";
-import Paginado from './Paginado'
+import Paginado from './Paginado';
+import Searchbar from './SearchBar';
 
 export default function Home(){
     const dispatch = useDispatch();
     const allVideogames = useSelector((state) => state.videogames);
+    const genres = useSelector((state) => state.allGenres);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [videogamesPerPage, setVideogamesPerPage] = useState(15);
+    const [sorted, setSorted] = useState(''); 
 
     const indexOfLastVideogames = currentPage * videogamesPerPage;
     const indexOfFirstVideogames = indexOfLastVideogames - videogamesPerPage;
@@ -23,6 +26,7 @@ export default function Home(){
 
     useEffect(()=>{
         dispatch(getVideogames());
+        dispatch(getGenres());
     },[]);
 
     function handleClick(event){
@@ -30,9 +34,31 @@ export default function Home(){
         dispatch(getVideogames());
     }
 
+    function handleFilterGenres(event){
+        dispatch(filterVideogameByGenre(event.value));
+        setCurrentPage(1);
+    }
+
+    function handleFilterOrigin(event){
+        dispatch(filterByOrigin(event.value));
+        setCurrentPage(1);
+    }
+
+    function handleSortByName(event){
+        dispatch(sortByName(event.value));
+        setCurrentPage(1);
+        setSorted('Ordenado ' + event.value);
+    }
+
+    function handleSortByRating(event){
+        dispatch(sortByRating(event.value));
+        setCurrentPage(1);
+        setSorted('Ordenado ' + event.value);
+    }
+
     const optionsName = [
-        {value: 'ascendente',label:'Ascendente'},
-        {value: 'descendente',label: 'Descendente'}
+        {value: 'a-z',label:'Ascendente'},
+        {value: 'z-a',label: 'Descendente'}
     ];
 
     const optionsRating = [
@@ -40,43 +66,33 @@ export default function Home(){
         {value: 'descendente',label: 'Descendente'}
     ];
 
-    const optionsGenres =[
-        {value: 'Action', label:'Action'},
-        {value: 'Adventure', label:'Adventure'},
-        {value: 'RPG', label:'RPG'},
-        {value: 'Shooter', label:'Shooter'},
-        {value: 'Puzzle', label:'Puzzle'},
-        {value: 'Indie', label:'Indie'},
-        {value: 'Platformer', label:'Platformer'},
-        {value: 'Massively Multiplayer', label:'Massively Multiplayer'},
-        {value: 'Sports', label:'Sports'},
-        {value: 'Racing', label:'Racing'},
-        {value: 'Simulation', label:'Simulation'},
-        {value: 'Arcade', label:'Arcade'},
-        {value: 'Strategy', label:'Strategy'},
-        {value: 'Fighting', label:'Fighting'},
-        {value: 'Casual', label:'Casual'},
-        {value: 'Family', label:'Family'}
+    let optionsGenres =[
+        {value: 'All', label: "All"},
     ];
+    genres.forEach(g => {
+        optionsGenres.push({value: g.name, label: g.name});
+    });
+
 
     const optionsOrigin = [
-        {value:'todos', label:'Todos'},
-        {value:'db', label:'Db'},
-        {value:'api', label:'Api'},
+        {value:'All', label:'All'},
+        {value:'Db', label:'Db'},
+        {value:'Api', label:'Api'},
     ];
     
     return (
         <div>
             <Link to='/videogame'>Crear un videojuego</Link>
+            <Searchbar></Searchbar>
             <h1>Home de videogames</h1>
             <button onClick={event => {handleClick(event)}}>
                 volver a cargar todos los videogames
             </button>
             <div>
-                <Select options={optionsName} placeholder="Ordernar por nombre" ></Select>
-                <Select options={optionsRating} placeholder="Ordenar por rating"></Select>
-                <Select options={optionsGenres} placeholder="Ordenar por genero"></Select>
-                <Select options={optionsOrigin} placeholder="Ordenar por origen"></Select>
+                <Select onChange={event => {handleSortByName(event)}} options={optionsName} placeholder="Ordernar por nombre" ></Select>
+                <Select onChange={event => {handleSortByRating(event)}} options={optionsRating} placeholder="Ordenar por rating"></Select>
+                <Select name="filterByGenre" onChange={event => {handleFilterGenres(event)}} defaultValue={optionsGenres[0]} options={optionsGenres} placeholder="Ordenar por genero"></Select>
+                <Select name="filterByOrigin" onChange={event => {handleFilterOrigin(event)}} defaultValue={optionsOrigin[0]} options={optionsOrigin} placeholder="Ordenar por origen"></Select>
                 <Paginado videogamesPerPage={videogamesPerPage} allVideogames={allVideogames.length} paginado={paginado}/>
                 {
                     currentVideogames?.map((e)=>{

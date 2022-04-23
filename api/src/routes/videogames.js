@@ -10,24 +10,24 @@ const router = Router();
 const apiGetData = async () => {
     const apiPage1 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=1&page_size=40`);
     const apiPage2 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=2&page_size=40`);
-    const apiPage3 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=3&page_size=20`);
+    const apiPage3 = await axios.get(`https://api.rawg.io/api/games?key=${api}&page=5&page_size=20`);
     let apiData = apiPage1.data.results.concat(apiPage2.data.results.concat(apiPage3.data.results));
 
-    apiData = apiData.map((el) => {
+    return apiData.map((el) => {
         return {
             id: el.id,
-            background_image: el.background_image,
             name: el.name,
+            background_image: el.background_image,
+            rating: el.rating,
             genres: el.genres.map(el => {return {name: el.name}})
         }
     });
-    return apiData;
 }
 
 //DB
 const dbGetData = async () => {
     return await Videogame.findAll({
-        attributes: ["background_image", "name"],
+        attributes: ["background_image", "name", "id", "rating", "createdInDb"],
         include:{
             model: Genre,
             attributes: ['name'],
@@ -44,8 +44,10 @@ const apiNameGetData = async (name) => {
     const dataApi = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${api}&page_size=15`);
     const dataInfo = dataApi.data.results.map((el) => {
         return {
-            background_image: el.background_image,
+            id: el.id,
             name: el.name,
+            background_image: el.background_image,
+            rating: el.rating,
             genres: el.genres.map(el => {return {name: el.name}})
         }
     });
@@ -58,7 +60,7 @@ const dbNameGetData = async (name) => {
         where: {
             name: {[Op.substring]: name}
         },
-        attributes: ["background_image", "name"],
+        attributes: ["id", "name" ,"background_image", "rating", "createdInDb"],
         include:{
             model: Genre,
             attributes: ['name'],

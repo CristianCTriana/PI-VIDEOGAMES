@@ -9,8 +9,9 @@ const getById = async (id) => {
     try {
         const apiInfo = await axios.get(`https://api.rawg.io/api/games/${id}?key=${api}`);
         return {
-            background_image: apiInfo.data.background_image,
             name: apiInfo.data.name,
+            id: apiInfo.data.id,
+            background_image: apiInfo.data.background_image,
             genres: apiInfo.data.genres.map((el)=>{
                 return {name: el.name}
             }),
@@ -38,6 +39,7 @@ const postData = async (name,
     description,
     released,
     rating,
+    background_image,
     genres,
     platforms,
     createdInDb) => {
@@ -46,6 +48,7 @@ const postData = async (name,
             description,
             released,
             rating,
+            background_image,
             platforms,
             createdInDb
         });
@@ -83,6 +86,7 @@ router.post('/', async (req, res) => {
         description,
         relased,
         rating,
+        background_image,
         genres,
         platforms,
         createdInDb
@@ -92,6 +96,7 @@ router.post('/', async (req, res) => {
         description,
         relased,
         rating,
+        background_image,
         genres,
         platforms,
         createdInDb));

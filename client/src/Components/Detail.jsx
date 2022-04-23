@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getDetail } from "../Actions";
 
 export default function Detail(){
@@ -14,8 +14,9 @@ export default function Detail(){
 
     return (
         <div>
+            <Link to='/home'><button>Home</button></Link>
             <h1>{videogame.name}</h1>
-            <img src={videogame.background_image} width='200px' height='200px'/>
+            <img alt="reference to game" src={videogame.background_image} width='200px' height='200px'/>
             <div>
                 <h4>Genres:</h4>
                 <ul>
