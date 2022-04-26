@@ -14,14 +14,16 @@ export default function Detail(){
         dispatch(getDetail(id));
     },[]);
 
-
+    let letter = videogame.name?.charAt(0).toUpperCase();
+    let showName = videogame.name?.slice(1);
+    
     return (
         <div>    
             <NavBar></NavBar>
             <div className="detailContainer">
                 <img className="imgDetail" alt="reference to game" src={videogame.background_image}/>
                 <div className="nameDetail">
-                    <h1>{videogame.name}</h1>
+                    <h1>{letter + showName}</h1>
                     {videogame.description?.split('<p>').join(' ').split('</p>').join(' ').split('<br />').join('\n')}
                 </div>
                 <div className="dataDetail">

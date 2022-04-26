@@ -44,7 +44,7 @@ const postData = async (name,
     platforms,
     createdInDb) => {
         const videogameCreated = await Videogame.create({
-            name,
+            name: name.toLowerCase(),
             description,
             released,
             rating,

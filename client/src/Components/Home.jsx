@@ -140,8 +140,10 @@ export default function Home(){
                 <Paginado videogamesPerPage={videogamesPerPage} allVideogames={allVideogames.length} paginado={paginado}/>
                 <div className="cardsContainer">{
                     currentVideogames?.map((e)=>{
+                        let letter = e.name?.charAt(0).toUpperCase();
+                        let showName = e.name?.slice(1);
                         return(
-                            <Card background_image={e.background_image} genres={e.genres} name={e.name} id={e.id} key={e.id}></Card>
+                            <Card background_image={e.background_image} genres={e.genres} name={letter + showName} id={e.id} key={e.id}></Card>
                         )
                     })
                 }</div>

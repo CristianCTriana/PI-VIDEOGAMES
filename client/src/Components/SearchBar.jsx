@@ -16,7 +16,7 @@ export default function Searchbar(){
 
     function handleSubmit(event){
         event.preventDefault();
-        dispatch(getVideogameByName(name));
+        dispatch(getVideogameByName(name.toLowerCase()));
     }
 
     return(
