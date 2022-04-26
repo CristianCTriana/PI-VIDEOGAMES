@@ -4,6 +4,7 @@ import Landing from './Components/Landing';
 import Home from './Components/Home';
 import VideogameCreate from './Components/VideogameCreate';
 import Detail from './Components/Detail';
+import NavBar from './Components/NavBar';
 
 
 function App() {

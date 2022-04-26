@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Righteous&display=swap');
+
+.background{
+    position : absolute;
+    width: 100%;
+    height: 100%;
+    background-image:  url('../Media/background.png');
+    background-size: 100%;
+}
+
+.text{
+    margin-top: 15%;
+    font-family: 'Righteous', cursive;
+    color: yellow;
+}
+
+.button{
+    font-family: 'Bebas Neue', cursive;
+    background-color: #85BEC6;
+    border: 2px solid #85BEC6;
+    border-radius: 15px 50px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    transition: background-color .5s;
+}
+
+.button:hover{
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+}

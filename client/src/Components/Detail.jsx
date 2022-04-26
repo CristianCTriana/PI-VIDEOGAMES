@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getDetail } from "../Actions";
+import NavBar from "./NavBar";
+import '../Styles/detail.css';
 
 export default function Detail(){
     const dispatch = useDispatch();
@@ -12,33 +14,60 @@ export default function Detail(){
         dispatch(getDetail(id));
     },[]);
 
+
     return (
-        <div>
-            <Link to='/home'><button>Home</button></Link>
-            <h1>{videogame.name}</h1>
-            <img alt="reference to game" src={videogame.background_image} width='200px' height='200px'/>
-            <div>
-                <h4>Genres:</h4>
-                <ul>
-                {videogame.genres?.map(el => {
-                    return <li key={el.name}>
-                            {el.name}
-                        </li>
-                    })}
-                </ul>
-            </div>
-            {videogame.description}
-            <h4>{videogame.released}</h4>
-            <h4>{videogame.rating}</h4>
-            <div>
-                <h4>Platforms:</h4>
-                <ul>
-                {videogame.platforms?.map(el => {
-                    return<li key={el.name}>
-                            {el.name}
-                        </li>
-                    })}
-                </ul>
+        <div>    
+            <NavBar></NavBar>
+            <div className="detailContainer">
+                <img className="imgDetail" alt="reference to game" src={videogame.background_image}/>
+                <div className="nameDetail">
+                    <h1>{videogame.name}</h1>
+                    {videogame.description?.split('<p>').join(' ').split('</p>').join(' ').split('<br />').join('\n')}
+                </div>
+                <div className="dataDetail">
+                    <table className="tableData">
+                        <tr className="tableRowData1">
+                            <td className="cellData">
+                                Rating
+                            </td>
+                            <td className="cellData">
+                                ({videogame.rating})
+                            </td>                                
+                        </tr>
+                        <tr className="tableRowData2">
+                            <td className="cellData">
+                                Genres
+                            </td>
+                            <td className="cellData">
+                                {videogame.genres?.map(el => {
+                                    return <span key={el.name}>
+                                        {" - "+el.name+" "} 
+                                    </span>
+                                })}
+                            </td>
+                        </tr>
+                        <tr className="tableRowData1">
+                            <td className="cellData">
+                                released
+                            </td>
+                            <td className="cellData">
+                                {videogame.released}
+                            </td>
+                        </tr>
+                        <tr className="tableRowData2">
+                            <td className="cellData">
+                                Platforms
+                            </td>
+                            <td className="cellData">
+                                {videogame.platforms?.map(el => {
+                                    return<span key={el.name}>
+                                        {" - "+el.name+" "} 
+                                    </span>
+                                })}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     )

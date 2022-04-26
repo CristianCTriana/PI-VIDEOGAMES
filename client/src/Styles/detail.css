@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Righteous&display=swap');
+
+.detailContainer{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr 2fr;
+    background-color: #ece8e1;
+}
+
+.imgDetail{
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    width: 80%;
+    height: 80%;
+    padding: 15px;
+    background-color: #181414;
+    margin: 10px;
+}
+
+.nameDetail{
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    height: 100%;
+    text-align: justify;
+    margin: 10px 50px 10px 10px;
+    font-family: 'Righteous';
+}
+
+.dataDetail{
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+    text-align: center;
+    padding: 0px 25% 0px 25%;
+    margin-top: 5%;
+    font-family: 'Righteous';
+}
+
+.tableData{
+    padding: 1.5rem;
+    border: 2px solid #85BEC6;
+    border-radius: 50px 15px;
+}
+
+.tableRowData1{
+    background-color: black;
+    color: white;
+}
+
+.tableRowData2{
+    background-color: white;
+    color: black;
+}
+
+.cellData{
+    padding: 0.5rem;
+}

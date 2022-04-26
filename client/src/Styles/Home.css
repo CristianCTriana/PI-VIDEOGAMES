@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Righteous&display=swap');
+
+.backgroundHomeMain{
+    margin: 0;
+    background-color: #ece8e1;
+}
+
+.filtrosText{
+    font-size: 25px;
+    font-family: 'Bebas Neue', cursive;
+    color: black;
+}
+
+.filters{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.orderItems{
+    width: auto;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    padding: 10px;
+}
+
+.filterItems{
+    width: auto;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    margin: 10px;
+}
+
+.filterSelect{
+    padding: 10px;
+    height: auto;
+    margin: 10px;
+    height: 50px;
+    border: 2px solid #85BEC6;
+    border-radius: 15px 50px;
+}
+
+.cardsContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-family: 'Righteous';
+}

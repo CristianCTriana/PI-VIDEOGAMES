@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Righteous&display=swap');
+
+.backgroundForm{
+    background-color: #ece8e1;
+    width: 100%;
+    height: 100%;
+}
+
+.titleForm{
+    font-family: 'Righteous', cursive;
+}
+
+.labelForm{
+    font-family: 'Righteous', cursive;
+    color: #8205b3;
+    margin: 5px 0px;
+    font-size: 15px;
+}
+
+.inputTextForm{
+    margin-left: 10px;
+    border: none;
+    border-bottom: 2px solid #181414;
+    font-family: 'Righteous', cursive;
+    background: none;
+    margin: 5px 10px;
+    font-size: 15px;
+}
+
+.inputTextForm:focus{
+    margin-left: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #8205b3;
+    font-family: 'Righteous', cursive;
+    background: none;
+    margin: 5px 10px;
+    font-size: 15px;
+}
+
+.table1{
+    margin-left: 30%;
+}
+
+.titlePlatfom{
+    font-family: 'Righteous', cursive;
+    margin: 5px 0px;
+}
+
+.tdTable1{
+    text-align: justify;
+    font-family: 'Righteous', cursive;
+    margin: 5px 0px;
+}
+
+.genresTable{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    text-align: justify;
+    width: 100%;
+    max-width: 750px;
+    font-family: 'Righteous', cursive;
+    margin-left: 15%;
+}
+
+.textarea{
+    border: 2px solid #8205b3;
+    border-radius: 15px 50px;
+    padding: 10px;
+}
+
+.errors{
+    font-size: 14px;
+    font-family: 'Righteous', cursive;
+    color: rgb(250, 64, 64);
+    margin: 5px 0px;
+}
+
+.buttonEnviar{
+    margin: 15px 0px;
+    font-family: 'Bebas Neue', cursive;
+    background-color: #85BEC6;
+    border: 2px solid #85BEC6;
+    border-radius: 15px 50px;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    transition: background-color .5s;
+}
+
+.buttonEnviar:hover{
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+}

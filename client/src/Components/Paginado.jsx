@@ -1,4 +1,5 @@
 import React from 'react';
+import paginado from '../Styles/paginado.css';
 
 export default function Paginado({videogamesPerPage, allVideogames, paginado}){
     const pageNumbers = []
@@ -8,11 +9,11 @@ export default function Paginado({videogamesPerPage, allVideogames, paginado}){
     }
 
     return (
-        <nav>
-            <ul>
+        <nav className='backgroundPaginado'>
+            <ul className='paginado'>
                 {pageNumbers?.map(number => (
-                    <li key={number}>
-                        <h6 onClick={()=>{paginado(number)}}>{number}</h6>
+                    <li className='itemPaginado' key={number}>
+                        <button className='numberPage' onClick={()=>{paginado(number)}}>{number}</button>
                     </li>
                 ))}
             </ul>

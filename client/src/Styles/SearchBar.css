@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Righteous&display=swap');
+
+.searchBar{
+    padding: 5px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+    width: 200px;
+    height: 20px;
+    margin-left: 50px;
+    font-family: 'Righteous';
+}
+
+.buttonSearchBar {
+    float: left;
+    width: 40px;
+    padding: 3px;
+    background: #0f1923;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+}

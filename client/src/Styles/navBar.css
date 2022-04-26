@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Righteous&display=swap');
+
+.backgroundNavBar{
+    background-color: #181414;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 50px;
+    align-content: center;
+}
+
+.textNavBar{
+    color: white;
+    text-decoration: none;
+    font-family: 'Righteous', cursive;
+}
+
+.textNavBar:hover{
+    text-decoration: overline;
+}

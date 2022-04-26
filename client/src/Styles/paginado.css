@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Righteous&display=swap');
+
+.paginadoBackground{
+    display: center; 
+    margin: 0 auto;
+}
+.itemPaginado{
+	display: inline;
+    margin-left: 4px;
+    margin-right: 4px;
+    color: white;
+}
+
+.numberPage{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    background-color: #85BEC6;
+    border: 2px solid #85BEC6;
+    border-radius: 15px 50px;
+}
+
+.numberPage:hover{
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+}
