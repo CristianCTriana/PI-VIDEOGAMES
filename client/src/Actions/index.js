@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function getVideogames(){
     return async function(dispatch){
-        var json = await axios.get("http://localhost:3001/videogames");
+        var json = await axios.get("https://backend-pivideogames.herokuapp.com/videogames");
         return dispatch({
             type: 'GET_VIDEOGAMES',
             payload: json.data
@@ -12,7 +12,7 @@ export function getVideogames(){
 
 export function getDetail(id){
     return async function(dispatch){
-        var json = await axios.get("http://localhost:3001/videogame/" + id);
+        var json = await axios.get("https://backend-pivideogames.herokuapp.com/videogame/" + id);
         return dispatch({
             type: 'GET_DETAIL',
             payload: json.data
@@ -29,7 +29,7 @@ export function filterVideogameByGenre(genres){
 
 export function getGenres(){
     return async function(dispatch){
-        var json = await axios.get("http://localhost:3001/genres");
+        var json = await axios.get("https://backend-pivideogames.herokuapp.com/genres");
         return dispatch({
             type: 'GET_GENRES',
             payload: json.data
@@ -61,7 +61,7 @@ export function sortByRating(order){
 export function getVideogameByName(name){
     return async function(dispatch){
         try{
-            const json = await axios.get(`http://localhost:3001/videogames?name=${name}`);
+            const json = await axios.get(`https://backend-pivideogames.herokuapp.com/videogames?name=${name}`);
             return dispatch({
                 type: 'GET_VIDEOGAMES_BY_NAME',
                 payload: json.data
@@ -74,7 +74,7 @@ export function getVideogameByName(name){
 
 export function postVideogame(payload){
     return async function(dispatch){
-        const postGame = await axios.post(`http://localhost:3001/videogame`, payload);
+        const postGame = await axios.post(`https://backend-pivideogames.herokuapp.com/videogame`, payload);
         return postGame;
     }
 }
