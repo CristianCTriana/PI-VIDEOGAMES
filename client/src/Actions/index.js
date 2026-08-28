@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL || 'https://backend-pivideogames.herokuapp.com';
+
 export function getVideogames(){
     return async function(dispatch){
-        var json = await axios.get("https://backend-pivideogames.herokuapp.com/videogames");
+        var json = await axios.get(`${API_URL}/videogames`);
         return dispatch({
             type: 'GET_VIDEOGAMES',
             payload: json.data
@@ -12,7 +14,7 @@ export function getVideogames(){
 
 export function getDetail(id){
     return async function(dispatch){
-        var json = await axios.get("https://backend-pivideogames.herokuapp.com/videogame/" + id);
+        var json = await axios.get(`${API_URL}/videogame/${id}`);
         return dispatch({
             type: 'GET_DETAIL',
             payload: json.data
@@ -29,7 +31,7 @@ export function filterVideogameByGenre(genres){
 
 export function getGenres(){
     return async function(dispatch){
-        var json = await axios.get("https://backend-pivideogames.herokuapp.com/genres");
+        var json = await axios.get(`${API_URL}/genres`);
         return dispatch({
             type: 'GET_GENRES',
             payload: json.data
@@ -61,7 +63,7 @@ export function sortByRating(order){
 export function getVideogameByName(name){
     return async function(dispatch){
         try{
-            const json = await axios.get(`https://backend-pivideogames.herokuapp.com/videogames?name=${name}`);
+            const json = await axios.get(`${API_URL}/videogames?name=${name}`);
             return dispatch({
                 type: 'GET_VIDEOGAMES_BY_NAME',
                 payload: json.data
@@ -74,7 +76,7 @@ export function getVideogameByName(name){
 
 export function postVideogame(payload){
     return async function(dispatch){
-        const postGame = await axios.post(`https://backend-pivideogames.herokuapp.com/videogame`, payload);
+        const postGame = await axios.post(`${API_URL}/videogame`, payload);
         return postGame;
     }
 }
